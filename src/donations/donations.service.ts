@@ -1,4 +1,5 @@
 import { Injectable } from '@nestjs/common';
+import { Donation } from '@prisma/client';
 import { PrismaService } from '../../prisma/prisma.service';
 import { CreateDonationInput } from './dto/create-donation.input';
 
@@ -10,11 +11,13 @@ export class DonationsService {
     return 'This action adds a new donation';
   }
 
-  findAll() {
+  async findAll(): Promise<Donation[]> {
     return this.prisma.donation.findMany();
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} donation`;
+  async findOne(id: number): Promise<Donation> {
+    return this.prisma.donation.findUnique({
+      where: { id },
+    });
   }
 }
