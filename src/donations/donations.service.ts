@@ -8,7 +8,11 @@ export class DonationsService {
   }
 
   findAll() {
-    return `This action returns all donations`;
+    return [
+      {
+        exampleField: 1,
+      },
+    ];
   }
 
   findOne(id: number) {
