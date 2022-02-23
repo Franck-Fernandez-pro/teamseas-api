@@ -4,6 +4,7 @@ import { ApolloDriver, ApolloDriverConfig } from '@nestjs/apollo';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { DonationsModule } from './donations/donations.module';
+import { Prisma } from '@prisma/client';
 
 @Module({
   imports: [
@@ -11,7 +12,7 @@ import { DonationsModule } from './donations/donations.module';
       playground: false,
       driver: ApolloDriver,
       typePaths: ['./**/*.graphql'],
-      resolvers: { DateTime: GraphQLISODateTime },
+      resolvers: { DateTime: GraphQLISODateTime, SortOrder: Prisma.SortOrder },
     }),
     DonationsModule,
   ],

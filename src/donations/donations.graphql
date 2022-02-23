@@ -1,4 +1,5 @@
 scalar DateTime
+scalar SortOrder
 
 type Donation {
   id: Int!
@@ -21,8 +22,13 @@ input CreateDonationInput {
   createdAt: DateTime
 }
 
+input OrderByParams {
+  field: String,
+  direction: SortOrder
+}
+
 type Query {
-  donations: [Donation]!
+  donations(orderBy: OrderByParams): [Donation]!
   donation(id: Int!): Donation
 }
 
