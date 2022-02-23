@@ -23,13 +23,14 @@ input CreateDonationInput {
 }
 
 input OrderByParams {
-  field: String,
+  field: String
   direction: SortOrder
 }
 
 type Query {
   donations(orderBy: OrderByParams): [Donation]!
   donation(id: Int!): Donation
+  totalDonations: Int!
 }
 
 type Mutation {
