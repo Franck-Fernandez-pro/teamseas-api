@@ -13,6 +13,10 @@ import { Prisma } from '@prisma/client';
       driver: ApolloDriver,
       typePaths: ['./**/*.graphql'],
       resolvers: { DateTime: GraphQLISODateTime, SortOrder: Prisma.SortOrder },
+      subscriptions: {
+        'graphql-ws': true,
+        'subscriptions-transport-ws': true,
+      },
     }),
     DonationsModule,
   ],
