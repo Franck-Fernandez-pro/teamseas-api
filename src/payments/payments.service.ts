@@ -2,12 +2,33 @@ import { BadRequestException, Injectable } from '@nestjs/common';
 import { CreatePaymentDto } from './dto/create-payment.dto';
 import { UpdatePaymentDto } from './dto/update-payment.dto';
 
+interface Payment {
+  id: string;
+  amount: number;
+  currency: string;
+}
+
 @Injectable()
 export class PaymentsService {
   private fakeUsers = [
-    { email: 'react@gmail.io' },
-    { email: 'vue@gmail.io' },
+    {
+      email: 'react@gmail.io',
+      payments: [
+        { id: '1', amount: 100, currency: 'USD' },
+        { id: '2', amount: 200, currency: 'EUR' },
+      ],
+    },
+    {
+      email: 'vue@gmail.io',
+      payment: [{ id: '3', amount: 300, currency: 'GBP' }],
+    },
     { email: 'angular@gmail.io' },
+  ];
+
+  private fakePayments: Payment[] = [
+    { id: '1', amount: 100, currency: 'USD' },
+    { id: '2', amount: 200, currency: 'EUR' },
+    { id: '3', amount: 300, currency: 'GBP' },
   ];
 
   async create(createPaymentDto: CreatePaymentDto) {
@@ -21,8 +42,8 @@ export class PaymentsService {
     throw new BadRequestException();
   }
 
-  findAll() {
-    return `This action returns all payments`;
+  findAll(): Payment[] {
+    return this.fakePayments;
   }
 
   findOne(id: number) {
