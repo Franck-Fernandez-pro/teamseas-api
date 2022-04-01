@@ -8,10 +8,12 @@ import { PrismaService } from '../../prisma/prisma.service';
 export class DonationsService {
   constructor(private prisma: PrismaService) {}
 
-  create(createDonationInput: DonationCreateInput) {
-    return this.prisma.donation.create({
+  async create(createDonationInput: DonationCreateInput): Promise<Donation> {
+    const { data }: any = await this.prisma.donation.create({
       data: createDonationInput,
     });
+
+    return data;
   }
 
   async findAll(orderBy?: OrderByParams): Promise<Donation[]> {
